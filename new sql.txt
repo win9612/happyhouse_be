@@ -1,0 +1,21 @@
+use happyhouse;
+
+CREATE TABLE `user_tb` ( 
+`idx` int NOT NULL AUTO_INCREMENT, 
+`name` varchar(70) COLLATE utf8mb4_unicode_ci NOT NULL, 
+`email` varchar(400) COLLATE utf8mb4_unicode_ci NOT NULL, 
+`password` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL, 
+`role` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL, 
+PRIMARY KEY (`idx`), KEY `email` (`email`) 
+)
+ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `Refresh_Token` ( 
+`idx` bigint NOT NULL AUTO_INCREMENT, 
+`access_token` text NOT NULL, `refresh_token` text NOT NULL, 
+`refresh_token_expiration_at` datetime DEFAULT NULL, 
+`user_email` varchar(100) NOT NULL, PRIMARY KEY (`idx`), 
+UNIQUE KEY `user_email` (`user_email`) 
+) 
+ENGINE=InnoDB AUTO_INCREMENT=183 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

@@ -1,12 +1,13 @@
-package com.ssafy.happyhouse.model.mapper;
+package com.rest.api.model.mapper;
 
 import java.util.List;
 
+import com.rest.api.model.dto.HouseInfoDto;
+import com.rest.api.model.dto.InterestDto;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.ssafy.happyhouse.model.HouseInfoDto;
-import com.ssafy.happyhouse.model.InterestDto;
-
+@Mapper
 public interface InterestMapper {
 
 	void addInterest(InterestDto interestDto) throws Exception;

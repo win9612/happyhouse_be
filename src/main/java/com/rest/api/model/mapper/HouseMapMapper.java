@@ -1,12 +1,11 @@
-package com.ssafy.happyhouse.model.mapper;
+package com.rest.api.model.mapper;
 
 import java.sql.SQLException;
 import java.util.List;
 
+import com.rest.api.model.dto.HouseInfoDto;
+import com.rest.api.model.dto.SidoGugunCodeDto;
 import org.apache.ibatis.annotations.Mapper;
-
-import com.ssafy.happyhouse.model.HouseInfoDto;
-import com.ssafy.happyhouse.model.SidoGugunCodeDto;
 
 @Mapper
 public interface HouseMapMapper {

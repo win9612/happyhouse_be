@@ -1,10 +1,12 @@
-package com.ssafy.happyhouse.model.mapper;
+package com.rest.api.model.mapper;
+
+import com.rest.api.model.dto.BaseAddressDto;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import com.ssafy.happyhouse.model.BaseAddressDto;
-
+@Mapper
 public interface BaseAddressMapper {
 
 	BaseAddressDto getBaseAddressOne(String dongCode) throws SQLException;

@@ -3,6 +3,7 @@ package com.rest.api.controller;
 import com.rest.api.model.dto.BaseAddressDto;
 import com.rest.api.model.dto.HouseInfoDto;
 import com.rest.api.model.service.SearchService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,23 +14,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/apt-search")
 @CrossOrigin("*")
-@RequiredArgsConstructor
 public class SearchController {
 
     private final Logger logger = LoggerFactory.getLogger(SearchController.class);
     private final SearchService searchService;
 
-    @GetMapping("/dong/{keyword}")
-    public ResponseEntity<?> searchDongList(@PathVariable("keyword") String keyword) throws Exception {
-        System.out.println(keyword);
-        System.out.println(keyword.length());
-        System.out.println(keyword.substring(keyword.length()-1, keyword.length()));
+    @ApiOperation(value = "입력keyword가 '구' 또는 '동'으로 끝날 때 해당하는 지역 리스트를 반환한다.", response = List.class)
+    @GetMapping("/dong")
+    public ResponseEntity<?> searchDongList(@RequestParam("keyword") String keyword) throws Exception {
         if(keyword.length() >= 2 &&
                 keyword.substring(keyword.length()-1, keyword.length()).equals("구")){
             logger.debug("dongList by gugun : {}", searchService.getDongListByGugun(keyword));
-            System.out.println(searchService.getDongListByGugun(keyword).toString());
             return new ResponseEntity<List<BaseAddressDto>>(searchService.getDongListByGugun(keyword), HttpStatus.OK);
         } else if(keyword.length() >= 2 &&
                 keyword.substring(keyword.length()-1, keyword.length()).equals("동")){
@@ -41,8 +39,9 @@ public class SearchController {
         return null;
     }
 
-    @GetMapping("/apt/{keyword}")
-    public ResponseEntity<?> searchAptList(@PathVariable("keyword") String keyword) throws Exception {
+    @ApiOperation(value = "입력keyword가 '동'으로 끝날 때 해당하는 아파트 리스트를 반환한다.", response = List.class)
+    @GetMapping("/apt")
+    public ResponseEntity<?> searchAptList(@RequestParam("keyword") String keyword) throws Exception {
         if(keyword.length() >= 2 &&
                 keyword.substring(keyword.length()-1, keyword.length()).equals("동")){
             logger.debug("aptList : {}", searchService.getAptListByDong(keyword));

@@ -1,50 +1,39 @@
-package com.ssafy.happyhouse.controller;
+package com.rest.api.controller;
 
 import java.util.List;
 
+import com.rest.api.model.dto.HouseDealDto;
+import com.rest.api.model.dto.HouseInfoDto;
+import com.rest.api.model.service.HouseInfoService;
+import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
-import com.ssafy.happyhouse.model.HouseDealDto;
-import com.ssafy.happyhouse.model.HouseInfoDto;
-import com.ssafy.happyhouse.model.service.HouseInfoService;
 
-@Controller
+@RestController
+@RequiredArgsConstructor
 @RequestMapping("/houseinfo")
 @CrossOrigin("*")
 public class HouseInfoController {
 	
 	private final Logger logger = LoggerFactory.getLogger(HouseMapController.class);
+	private final HouseInfoService houseInfoService;
 
-	@Autowired
-	private HouseInfoService houseInfoService;
-	
-	@GetMapping("/{aptCode}")
-	public String house() throws Exception {
-		return "house/houseinfo";
-	}
-	
+	@ApiOperation(value = "aptCode에 해당하는 아파트 정보를 반환한다.", response = HouseInfoDto.class)
 	@GetMapping("/list/{aptCode}")
 	@ResponseBody
 	public ResponseEntity<HouseInfoDto> houseinfo(@PathVariable("aptCode") int aptCode) throws Exception{
 		return new ResponseEntity<HouseInfoDto>(houseInfoService.getHouseInfo(aptCode), HttpStatus.OK);
 	}
-	
+
+	@ApiOperation(value = "aptCode에 해당하는 아파트의 거래 정보 리스트를 반환한다.", response = List.class)
 	@GetMapping("/deal/{aptCode}")
 	@ResponseBody
 	public ResponseEntity<List<HouseDealDto>> housedeal(@PathVariable("aptCode") int aptCode) throws Exception{
 		return new ResponseEntity<List<HouseDealDto>>(houseInfoService.getHouseDealList(aptCode), HttpStatus.OK);
 	}
-	
 }

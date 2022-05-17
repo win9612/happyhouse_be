@@ -1,11 +1,13 @@
-package com.ssafy.happyhouse.model.mapper;
+package com.rest.api.model.mapper;
+
+import com.rest.api.model.dto.HouseDealDto;
+import com.rest.api.model.dto.HouseInfoDto;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import com.ssafy.happyhouse.model.HouseDealDto;
-import com.ssafy.happyhouse.model.HouseInfoDto;
-
+@Mapper
 public interface HouseInfoMapper {
 
 	HouseInfoDto getHouseInfo(int aptCode) throws SQLException;

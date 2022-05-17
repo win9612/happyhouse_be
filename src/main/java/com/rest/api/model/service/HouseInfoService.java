@@ -11,16 +11,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class HouseInfoServiceImpl implements HouseInfoService{
+public class HouseInfoService {
 
 	private final HouseInfoMapper houseInfoMapper;
 
-	@Override
 	public HouseInfoDto getHouseInfo(int aptCode) throws Exception {
 		return houseInfoMapper.getHouseInfo(aptCode);
 	}
 
-	@Override
 	public List<HouseDealDto> getHouseDealList(int aptCode) throws Exception {
 		return houseInfoMapper.listHouseDeal(aptCode);
 	}

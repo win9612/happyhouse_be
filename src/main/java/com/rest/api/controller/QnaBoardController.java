@@ -22,7 +22,8 @@ public class QnaBoardController {
 
     @ApiOperation(value = "게시글 등록")
     @PostMapping("/add")
-    public ResponseEntity<String> add(@ModelAttribute QnaBoardDto qnaBoardDto) throws Exception {
+    public ResponseEntity<String> add(@RequestBody QnaBoardDto qnaBoardDto) throws Exception {
+        System.out.println(qnaBoardDto.getbTitle());
         qnaBoardService.addArticle(qnaBoardDto);
         return new ResponseEntity<String>(HttpStatus.OK);
     }
@@ -43,7 +44,7 @@ public class QnaBoardController {
 
     @ApiOperation(value = "게시글 수정")
     @PutMapping("/modify")
-    public ResponseEntity<String> modify(@ModelAttribute QnaBoardDto qnaBoardDto) throws Exception{
+    public ResponseEntity<String> modify(@RequestBody QnaBoardDto qnaBoardDto) throws Exception{
         qnaBoardService.updateArticle(qnaBoardDto);
         return new ResponseEntity<String>(HttpStatus.OK);
     }

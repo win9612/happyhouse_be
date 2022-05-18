@@ -25,6 +25,7 @@ public class QnaCommentController {
     @ApiOperation(value = "코멘트 등록")
     @PostMapping("/add")
     public ResponseEntity<String> add(@RequestBody QnaCommentDto qnaCommentDto) throws Exception {
+        System.out.println(qnaCommentDto.toString());
         qnaCommentService.addComment(qnaCommentDto);
         return new ResponseEntity<String>(HttpStatus.OK);
     }

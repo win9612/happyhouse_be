@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rest.api.model.mapper.QnaBoardMapper">
+<!--    게시글 등록-->
+    <insert id="addArticle" parameterType="com.rest.api.model.dto.QnaBoardDto">
+        insert into qna_board
+            (b_writer_email, b_writer_name, b_title, b_content, b_write_date)
+        values(#{bWriterEmail}, #{bWriterName}, #{bTitle}, #{bContent}, now())
+    </insert>
+
+<!--    게시글 전체 목록-->
+    <select id="getArticleList" resultType="com.rest.api.model.dto.QnaBoardDto">
+        select b_no as bNo, b_writer_email as bWriterEmail, b_writer_name as bWriterName,b_title as bTitle,
+            b_content as bContent, b_hits as bHits, b_write_date as bWriteDate, b_modify_date as bModifyDate
+        from qna_board
+    </select>
+
+<!--    게시글 하나 반환-->
+    <select id="getArticle" parameterType="int" resultType="com.rest.api.model.dto.QnaBoardDto">
+        select b_no as bNo, b_writer_email as bWriterEmail, b_writer_name as bWriterName,b_title as bTitle,
+               b_content as bContent, b_hits as bHits, b_write_date as bWriteDate, b_modify_date as bModifyDate
+        from qna_board
+        where b_no=#{bNo}
+    </select>
+    
+<!--    게시글 수정-->
+    <update id="updateArticle" parameterType="com.rest.api.model.dto.QnaBoardDto">
+        update qna_board
+        set
+            b_writer_email = #{bWriterEmail},
+            b_writer_name = #{bWriterName},
+            b_title = #{bTitle},
+            b_content = #{bContent},
+            b_modify_date = now()
+        where b_no=#{bNo}
+    </update>
+
+<!--    게시글 삭제-->
+    <delete id="deleteArticle" parameterType="int">
+        delete from qna_board
+        where b_no = #{bNo}
+    </delete>
+</mapper>

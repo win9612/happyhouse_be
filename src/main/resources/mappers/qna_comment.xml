@@ -6,8 +6,8 @@
 <!-- 코멘트 등록-->
     <insert id="addComment" parameterType="com.rest.api.model.dto.QnaCommentDto">
         insert into qna_comment
-            (b_no, b_writer_email, b_writer_name, b_content, b_write_date)
-        values(#{bNo}, #{bWriterEmail}, #{bWriterName}, #{bContent}, now())
+            (c_no, b_no, c_writer_email, c_writer_name, c_content, c_write_date)
+        values(#{cNo}, #{bNo}, #{cWriterEmail}, #{cWriterName}, #{cContent}, now())
     </insert>
 
 <!-- 한 게시물의 코멘트 전체 목록-->

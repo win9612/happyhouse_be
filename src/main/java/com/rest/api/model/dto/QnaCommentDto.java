@@ -9,8 +9,8 @@ public class QnaCommentDto {
     private String cWriterEmail; // 작성자 이메일
     private String cWriterName; // 작성자 이름
     private String cContent; // 내용
-    private String bWriteDate; // 작성일시
-    private String bModifyDate; // 수정일시
+    private String cWriteDate; // 작성일시
+    private String cModifyDate; // 수정일시
 
     public int getbNo() {
         return bNo;
@@ -52,19 +52,32 @@ public class QnaCommentDto {
         this.cContent = cContent;
     }
 
-    public String getbWriteDate() {
-        return bWriteDate;
+    public String getcWriteDate() {
+        return cWriteDate;
     }
 
-    public void setbWriteDate(String bWriteDate) {
-        this.bWriteDate = bWriteDate;
+    public void setcWriteDate(String cWriteDate) {
+        this.cWriteDate = cWriteDate;
     }
 
-    public String getbModifyDate() {
-        return bModifyDate;
+    public String getcModifyDate() {
+        return cModifyDate;
     }
 
-    public void setbModifyDate(String bModifyDate) {
-        this.bModifyDate = bModifyDate;
+    public void setcModifyDate(String cModifyDate) {
+        this.cModifyDate = cModifyDate;
+    }
+
+    @Override
+    public String toString() {
+        return "QnaCommentDto{" +
+                "cNo=" + cNo +
+                ", bNo=" + bNo +
+                ", cWriterEmail='" + cWriterEmail + '\'' +
+                ", cWriterName='" + cWriterName + '\'' +
+                ", cContent='" + cContent + '\'' +
+                ", cWriteDate='" + cWriteDate + '\'' +
+                ", cModifyDate='" + cModifyDate + '\'' +
+                '}';
     }
 }

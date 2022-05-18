@@ -73,4 +73,18 @@ public class QnaBoardDto {
     public void setbModifyDate(String bModifyDate) {
         this.bModifyDate = bModifyDate;
     }
+
+    @Override
+    public String toString() {
+        return "QnaBoardDto{" +
+                "bNo=" + bNo +
+                ", bWriterEmail='" + bWriterEmail + '\'' +
+                ", bWriterName='" + bWriterName + '\'' +
+                ", bTitle='" + bTitle + '\'' +
+                ", bContent='" + bContent + '\'' +
+                ", bHits=" + bHits +
+                ", bWriteDate='" + bWriteDate + '\'' +
+                ", bModifyDate='" + bModifyDate + '\'' +
+                '}';
+    }
 }

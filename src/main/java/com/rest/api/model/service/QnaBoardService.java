@@ -2,6 +2,7 @@ package com.rest.api.model.service;
 
 import com.rest.api.model.dto.QnaBoardDto;
 import com.rest.api.model.mapper.QnaBoardMapper;
+import com.rest.api.model.mapper.QnaCommentMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

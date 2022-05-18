@@ -17,4 +17,7 @@ public interface SearchMapper {
 
     // 동까지 입력했을 때 필터링된 아파트 반환
     List<HouseInfoDto> getAptListByDong(String dong) throws Exception;
+
+    // 아파트 이름 입력했을 때 필터리된 아파트 반환
+    List<HouseInfoDto> getAptListByAptName(String aptName) throws Exception;
 }

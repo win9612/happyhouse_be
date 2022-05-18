@@ -49,4 +49,14 @@ public class SearchController {
         }
         return null;
     }
+
+    @ApiOperation(value = "아파트 이름으로 검색하면 아파트 리스트 반환", response = List.class)
+    @GetMapping("/aptName")
+    public ResponseEntity<?> searcAptList(@RequestParam("keyword") String keyword) throws Exception {
+        // 키워드 길이가 2이상
+        if(keyword.length() >= 2) {
+            return new ResponseEntity<>(searchService.getAptListBtAptName(keyword), HttpStatus.OK);
+        }
+        return null;
+    }
 }

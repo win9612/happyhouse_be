@@ -25,4 +25,9 @@ public class SearchService {
     public List<HouseInfoDto> getAptListByDong(String dong) throws Exception{
         return searchMapper.getAptListByDong(dong);
     }
+
+    public List<HouseInfoDto> getAptListBtAptName(String aptName) throws  Exception {
+        return searchMapper.getAptListByAptName(aptName);
+    }
+
 }

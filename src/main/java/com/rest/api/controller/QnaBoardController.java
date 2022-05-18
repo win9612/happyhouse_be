@@ -38,8 +38,8 @@ public class QnaBoardController {
     @ApiOperation(value = "bNo에 해당하는 게시글 하나 반환")
     @GetMapping("/getOne")
     @ResponseBody
-    public ResponseEntity<QnaBoardDto> getOne(@RequestParam("bNo")int bNo) throws Exception{
-        return new ResponseEntity<QnaBoardDto>(qnaBoardService.getArticle(bNo), HttpStatus.OK);
+    public ResponseEntity<QnaBoardDto> getOne(@RequestParam("bNo")String bNo) throws Exception{
+        return new ResponseEntity<QnaBoardDto>(qnaBoardService.getArticle(Integer.parseInt(bNo)), HttpStatus.OK);
     }
 
     @ApiOperation(value = "게시글 수정")
@@ -51,8 +51,8 @@ public class QnaBoardController {
 
     @ApiOperation(value = "bNo에 해당하는 게시글 삭제")
     @DeleteMapping("/delete")
-    public ResponseEntity<String> delete(@RequestParam("bNo")int bNo) throws Exception{
-        qnaBoardService.deleteArticle(bNo);
+    public ResponseEntity<String> delete(@RequestParam("bNo")String bNo) throws Exception{
+        qnaBoardService.deleteArticle(Integer.parseInt(bNo));
         return new ResponseEntity<String>(HttpStatus.OK);
     }
 

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -19,8 +20,37 @@ public class QnaBoardService {
         qnaBoardMapper.addArticle(qnaBoardDto);
     }
 
-    public List<QnaBoardDto> getArticleList() throws Exception{
-        return qnaBoardMapper.getArticleList();
+    public int getTotalPage() throws Exception {
+        int totalCount = qnaBoardMapper.getTotalCount(); // 게시글 83개
+        int totalPage = (int) Math.ceil((double)totalCount / 10); // 페이지 수 9개
+        return totalPage;
+    }
+
+    public int getPageNaviStartPage(int currentPage) throws Exception {
+        if(currentPage <= 10){
+            return 1;
+        }
+        double p = (double) currentPage / 10 - 0.1;
+        p = Math.floor(p) + 0.1;
+        int result = (int) p*10 + 1;
+
+        return result;
+    }
+
+    public int getPageNaviEndPage(int currentPage) throws Exception {
+        int result = getPageNaviStartPage(currentPage) + 9;
+        if(result > getTotalPage()){
+            result = getTotalPage();
+        }
+
+        return result;
+    }
+
+    public List<QnaBoardDto> getArticleList(int page) throws Exception{
+        int start = (page * 10) - 10; // 고정된 수치. 이대로 해도 됨
+        int end = 10; // 한 페이지당 몇 개를 리턴할 것인지
+
+        return qnaBoardMapper.getArticleList(start, end);
     }
 
     public QnaBoardDto getArticle(int bNo) throws Exception{

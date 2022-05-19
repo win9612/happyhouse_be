@@ -3,7 +3,7 @@ package com.rest.api.config.security;
 import com.rest.api.handler.AuthenticationEntryPointHandler;
 import com.rest.api.handler.JwtAuthenticationFilter;
 import com.rest.api.handler.WebAccessDeniedHandler;
-import com.rest.api.model.service.CustomUserDetailService;
+import com.rest.api.model.service.house.CustomUserDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

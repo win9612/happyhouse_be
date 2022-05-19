@@ -1,7 +1,7 @@
 package com.rest.api.config.security;
 
-import com.rest.api.model.dto.AuthDto;
-import com.rest.api.model.service.CustomUserDetailService;
+import com.rest.api.model.dto.user.auth.AuthDto;
+import com.rest.api.model.service.house.CustomUserDetailService;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

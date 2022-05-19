@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rest.api.model.mapper.house.SearchMapper">
+
+	<select id="getDongListByGugun" parameterType="String" resultType="com.rest.api.model.dto.house.BaseAddressDto">
+		select no, sidoName, gugunName, dongName, dongCode, lat, lng
+		from baseaddress
+		where gugunName=#{gugun};
+	</select>
+
+	<select id="getDongListByDong" parameterType="String" resultType="com.rest.api.model.dto.house.BaseAddressDto">
+		select no, sidoName, gugunName, dongName, dongCode, lat, lng
+		from baseaddress
+		where dongName=#{dong};
+	</select>
+
+	<select id="getAptListByDong" parameterType="String" resultType="com.rest.api.model.dto.house.HouseInfoDto">
+		select aptCode, aptName, dongName, lat, lng
+		from houseinfo
+		where dongName=#{dong};
+	</select>
+	
+	<select id="getAptListByAptName" parameterType="String" resultType="com.rest.api.model.dto.house.HouseInfoDto">
+		select aptCode, aptName, dongName, lat, lng
+		from houseinfo
+		where aptName like concat('%',#{aptNAme},'%');
+	</select>
+
+</mapper>

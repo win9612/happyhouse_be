@@ -3,6 +3,8 @@ package com.rest.api.controller.board;
 import com.rest.api.controller.house.HouseMapController;
 import com.rest.api.model.dto.board.QnaBoardDto;
 import com.rest.api.model.service.board.QnaBoardService;
+import com.rest.api.response.ApiResponse;
+import com.rest.api.response.ResponseMap;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -24,7 +26,6 @@ public class QnaBoardController {
     @ApiOperation(value = "게시글 등록")
     @PostMapping("/add")
     public ResponseEntity<String> add(@RequestBody QnaBoardDto qnaBoardDto) throws Exception {
-        System.out.println(qnaBoardDto.getbTitle());
         qnaBoardService.addArticle(qnaBoardDto);
         return new ResponseEntity<String>(HttpStatus.OK);
     }
@@ -32,8 +33,29 @@ public class QnaBoardController {
     @ApiOperation(value = "게시글 리스트 반환")
     @GetMapping("/getList")
     @ResponseBody
-    public ResponseEntity<List<QnaBoardDto>> getList() throws Exception {
-        return new ResponseEntity<List<QnaBoardDto>>(qnaBoardService.getArticleList(), HttpStatus.OK);
+    public ApiResponse getList(@RequestParam("page")String page) throws Exception {
+        /* page 변수 전처리 */
+        if(page==null || page.equals(""))
+            page = "1";
+
+        /* 현재 페이지의 게시글 목록, 총 페이지 수, 현재 페이지 계산 */
+        List<QnaBoardDto> list = qnaBoardService.getArticleList(Integer.parseInt(page));
+        int totalPage = qnaBoardService.getTotalPage();
+        int currentPage = Integer.parseInt(page);
+
+        /* 현재 페이지 기준 Navi바 구성 계산 */
+        int pageNaviStartPage = qnaBoardService.getPageNaviStartPage(currentPage);
+        int pageNaviEndPage = qnaBoardService.getPageNaviEndPage(currentPage);
+
+        ResponseMap result = new ResponseMap();
+        result.setResponseData("articleList", list);
+        result.setResponseData("totalPage", totalPage);
+        result.setResponseData("currentPage", currentPage);
+        result.setResponseData("startPage", pageNaviStartPage);
+        result.setResponseData("endPage", pageNaviEndPage);
+        result.setCode(200);
+
+        return result;
     }
 
     @ApiOperation(value = "bNo에 해당하는 게시글 하나 반환")

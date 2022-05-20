@@ -19,14 +19,20 @@ public class SearchService {
     }
 
     public List<BaseAddressDto> getDongListByDong(String dong) throws Exception{
-        return searchMapper.getDongListByDong(dong);
+        String[] wordList = dong.split(" ");
+        String keyword = wordList[wordList.length-1];
+        return searchMapper.getDongListByDong(keyword);
     }
 
     public List<HouseInfoDto> getAptListByDong(String dong) throws Exception{
-        return searchMapper.getAptListByDong(dong);
+        String[] wordList = dong.split(" ");
+        String keyword = wordList[wordList.length-1];
+        return searchMapper.getAptListByDong(keyword);
     }
 
     public List<HouseInfoDto> getAptListBtAptName(String aptName) throws  Exception {
+        String[] wordList = aptName.split(" ");
+        String keyword = wordList[wordList.length-1];
         return searchMapper.getAptListByAptName(aptName);
     }
 

@@ -19,13 +19,13 @@
 	<select id="getAptListByDong" parameterType="String" resultType="com.rest.api.model.dto.house.HouseInfoDto">
 		select aptCode, aptName, dongName, lat, lng
 		from houseinfo
-		where dongName=#{dong};
+		where dongName like concat('%',#{dong},'%');
 	</select>
 	
 	<select id="getAptListByAptName" parameterType="String" resultType="com.rest.api.model.dto.house.HouseInfoDto">
 		select aptCode, aptName, dongName, lat, lng
 		from houseinfo
-		where aptName like concat('%',#{aptNAme},'%');
+		where aptName like concat('%',#{aptName},'%');
 	</select>
 
 </mapper>

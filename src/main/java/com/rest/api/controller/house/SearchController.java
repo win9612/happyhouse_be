@@ -22,29 +22,37 @@ public class SearchController {
     private final Logger logger = LoggerFactory.getLogger(SearchController.class);
     private final SearchService searchService;
 
-    @ApiOperation(value = "입력keyword가 '구' 또는 '동'으로 끝날 때 해당하는 지역 리스트를 반환한다.", response = List.class)
+    @ApiOperation(value = "입력keyword가 '구' 또는 '동 or 가'으로 끝날 때 해당하는 지역 리스트를 반환한다.", response = List.class)
     @GetMapping("/dong")
     public ResponseEntity<?> searchDongList(@RequestParam("keyword") String keyword) throws Exception {
-        if(keyword.length() >= 2 &&
-                keyword.substring(keyword.length()-1, keyword.length()).equals("구")){
+        String lastLetter = keyword.substring(keyword.length()-1, keyword.length());
+        if(keyword.length() >= 2 && lastLetter.equals("구")){
             logger.debug("dongList by gugun : {}", searchService.getDongListByGugun(keyword));
             return new ResponseEntity<List<BaseAddressDto>>(searchService.getDongListByGugun(keyword), HttpStatus.OK);
-        } else if(keyword.length() >= 2 &&
-                keyword.substring(keyword.length()-1, keyword.length()).equals("동")){
+        } else if(keyword.length() >= 2 && lastLetter.equals("동")){
             logger.debug("dongList by dong : {}", searchService.getDongListByDong(keyword));
-            System.out.println(searchService.getDongListByDong(keyword).toString());
+            System.out.println(lastLetter);
+            return new ResponseEntity<List<BaseAddressDto>>(searchService.getDongListByDong(keyword), HttpStatus.OK);
+        } else if(keyword.length() >= 2 && lastLetter.equals("가")){
+            logger.debug("dongList by dong : {}", searchService.getDongListByDong(keyword));
+            System.out.println(lastLetter);
             return new ResponseEntity<List<BaseAddressDto>>(searchService.getDongListByDong(keyword), HttpStatus.OK);
         }
         // 글자 수가 1글자 이하고 구나 동으로 끝나지 않을 경우
         return null;
     }
 
-    @ApiOperation(value = "입력keyword가 '동'으로 끝날 때 해당하는 아파트 리스트를 반환한다.", response = List.class)
+    @ApiOperation(value = "입력keyword가 '동 or 가'으로 끝날 때 해당하는 아파트 리스트를 반환한다.", response = List.class)
     @GetMapping("/apt")
-    public ResponseEntity<?> searchAptList(@RequestParam("keyword") String keyword) throws Exception {
-        if(keyword.length() >= 2 &&
-                keyword.substring(keyword.length()-1, keyword.length()).equals("동")){
+    public ResponseEntity<?> searchAptListByDong(@RequestParam("keyword") String keyword) throws Exception {
+        String lastLetter = keyword.substring(keyword.length()-1, keyword.length());
+        if(keyword.length() >= 2 && lastLetter.equals("동")){
             logger.debug("aptList : {}", searchService.getAptListByDong(keyword));
+            System.out.println(lastLetter);
+            return new ResponseEntity<List<HouseInfoDto>>(searchService.getAptListByDong(keyword), HttpStatus.OK);
+        } else if (keyword.length() >= 2 && lastLetter.equals("가")){
+            logger.debug("aptList : {}", searchService.getAptListByDong(keyword));
+            System.out.println(lastLetter);
             return new ResponseEntity<List<HouseInfoDto>>(searchService.getAptListByDong(keyword), HttpStatus.OK);
         }
         return null;
@@ -52,7 +60,7 @@ public class SearchController {
 
     @ApiOperation(value = "아파트 이름으로 검색하면 아파트 리스트 반환", response = List.class)
     @GetMapping("/aptName")
-    public ResponseEntity<?> searcAptList(@RequestParam("keyword") String keyword) throws Exception {
+    public ResponseEntity<?> searchAptListByAptName(@RequestParam("keyword") String keyword) throws Exception {
         // 키워드 길이가 2이상
         if(keyword.length() >= 2) {
             return new ResponseEntity<>(searchService.getAptListBtAptName(keyword), HttpStatus.OK);

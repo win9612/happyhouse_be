@@ -21,6 +21,11 @@ public class AccountService {
         return result;
     }
 
+    public AccountDto getAccount(String email) {
+        return accountMapper.getAccount(email);
+    }
+
+
     private String hashPassword(String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.encode(password);

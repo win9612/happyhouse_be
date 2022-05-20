@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface AccountMapper {
 
     void insertAccount(AccountDto accountDto);
+    AccountDto getAccount(String email);
 }

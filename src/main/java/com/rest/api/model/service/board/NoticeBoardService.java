@@ -1,27 +1,26 @@
 package com.rest.api.model.service.board;
 
-import com.rest.api.model.dto.board.QnaBoardDto;
-import com.rest.api.model.mapper.board.QnaBoardMapper;
+import com.rest.api.model.dto.board.NoticeBoardDto;
+import com.rest.api.model.mapper.board.NoticeBoardMapper;;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class QnaBoardService {
+public class NoticeBoardService {
 
-    private final QnaBoardMapper qnaBoardMapper;
+    private final NoticeBoardMapper noticeBoardMapper;
 
     @Transactional
-    public void addArticle(QnaBoardDto qnaBoardDto) throws Exception{
-        qnaBoardMapper.addArticle(qnaBoardDto);
+    public void addArticle(NoticeBoardDto noticeBoardDto) throws Exception{
+        noticeBoardMapper.addArticle(noticeBoardDto);
     }
 
     public int getTotalPage() throws Exception {
-        int totalCount = qnaBoardMapper.getTotalCount();
+        int totalCount = noticeBoardMapper.getTotalCount();
         int totalPage = (int) Math.ceil((double)totalCount / 10);
         return totalPage;
     }
@@ -46,24 +45,24 @@ public class QnaBoardService {
         return result;
     }
 
-    public List<QnaBoardDto> getArticleList(int page) throws Exception{
+    public List<NoticeBoardDto> getArticleList(int page) throws Exception{
         int start = (page * 10) - 10; // 고정된 수치. 이대로 해도 됨
         int end = 10; // 한 페이지당 몇 개를 리턴할 것인지
 
-        return qnaBoardMapper.getArticleList(start, end);
+        return noticeBoardMapper.getArticleList(start, end);
     }
 
-    public QnaBoardDto getArticle(int bNo) throws Exception{
-        return qnaBoardMapper.getArticle(bNo);
+    public NoticeBoardDto getArticle(int bNo) throws Exception{
+        return noticeBoardMapper.getArticle(bNo);
     }
 
     @Transactional
-    public void updateArticle(QnaBoardDto qnaBoardDto) throws Exception{
-        qnaBoardMapper.updateArticle(qnaBoardDto);
+    public void updateArticle(NoticeBoardDto noticeBoardDto) throws Exception{
+        noticeBoardMapper.updateArticle(noticeBoardDto);
     }
 
     @Transactional
     public void deleteArticle(int bNo) throws Exception {
-        qnaBoardMapper.deleteArticle(bNo);
+        noticeBoardMapper.deleteArticle(bNo);
     }
 }

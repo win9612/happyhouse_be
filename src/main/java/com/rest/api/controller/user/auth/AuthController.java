@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-@Api(tags = "Auth / 로그인")
+@Api(tags = "인증관리")
 @RequestMapping("/app/auth")
 @RestController
 @RequiredArgsConstructor
@@ -20,13 +20,13 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping("/login")
     @ApiOperation(value="로그인")
+    @PostMapping("/login")
     public ApiResponse login(@RequestBody @Valid AuthDto.LoginDto loginDto){
         return authService.login(loginDto);
     }
+    @ApiOperation(value="리프레쉬 토큰 발급")
     @PostMapping("/refreshToken")
-    @ApiOperation(value="새로운 토큰 발급")
     public ApiResponse newAccessToken(@RequestBody @Valid AuthDto.GetNewAccessTokenDto getNewAccessTokenDTO, HttpServletRequest request) {
         return authService.newAccessToken(getNewAccessTokenDTO, request);
     }

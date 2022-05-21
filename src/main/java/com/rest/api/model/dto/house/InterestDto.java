@@ -3,7 +3,7 @@ package com.rest.api.model.dto.house;
 public class InterestDto {
 	
 	private int no; // 사용자 번호
-	private int aptCode; // 아파트 번호
+	private long aptCode; // 아파트 번호
 	
 	public int getNo() {
 		return no;
@@ -11,10 +11,10 @@ public class InterestDto {
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public int getAptCode() {
+	public long getAptCode() {
 		return aptCode;
 	}
-	public void setAptCode(int aptCode) {
+	public void setAptCode(long aptCode) {
 		this.aptCode = aptCode;
 	}
 	

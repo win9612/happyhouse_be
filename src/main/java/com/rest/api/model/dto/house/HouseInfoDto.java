@@ -2,33 +2,31 @@ package com.rest.api.model.dto.house;
 
 public class HouseInfoDto {
 
-	private int aptCode;
-	private String aptName;
+	private long aptCode;
+	private String apartmentName;
 	private String dongCode;
-	private String dongName;
+	private String dong; // dongName
 	private String sidoName;
 	private String gugunName;
 	private int buildYear;
 	private String jibun;
 	private String lat;
 	private String lng;
-	private String img;
-	private String recentPrice;
 
-	public int getAptCode() {
+	public long getAptCode() {
 		return aptCode;
 	}
 
-	public void setAptCode(int aptCode) {
+	public void setAptCode(long aptCode) {
 		this.aptCode = aptCode;
 	}
 
-	public String getAptName() {
-		return aptName;
+	public String getApartmentName() {
+		return apartmentName;
 	}
 
-	public void setAptName(String aptName) {
-		this.aptName = aptName;
+	public void setApartmentName(String apartmentName) {
+		this.apartmentName = apartmentName;
 	}
 
 	public String getDongCode() {
@@ -39,12 +37,12 @@ public class HouseInfoDto {
 		this.dongCode = dongCode;
 	}
 
-	public String getDongName() {
-		return dongName;
+	public String getDong() {
+		return dong;
 	}
 
-	public void setDongName(String dongName) {
-		this.dongName = dongName;
+	public void setDong(String dong) {
+		this.dong = dong;
 	}
 
 	public String getSidoName() {
@@ -95,28 +93,19 @@ public class HouseInfoDto {
 		this.lng = lng;
 	}
 
-	public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		this.img = img;
-	}
-
-	public String getRecentPrice() {
-		return recentPrice;
-	}
-
-	public void setRecentPrice(String recentPrice) {
-		this.recentPrice = recentPrice;
-	}
-
 	@Override
 	public String toString() {
-		return "HouseInfoDto [aptCode=" + aptCode + ", aptName=" + aptName + ", dongCode=" + dongCode + ", dongName="
-				+ dongName + ", sidoName=" + sidoName + ", gugunName=" + gugunName + ", buildYear=" + buildYear
-				+ ", jibun=" + jibun + ", lat=" + lat + ", lng=" + lng + ", img=" + img + ", recentPrice=" + recentPrice
-				+ "]";
+		return "HouseInfoDto{" +
+				"aptCode=" + aptCode +
+				", apartmentName='" + apartmentName + '\'' +
+				", dongCode='" + dongCode + '\'' +
+				", dong='" + dong + '\'' +
+				", sidoName='" + sidoName + '\'' +
+				", gugunName='" + gugunName + '\'' +
+				", buildYear=" + buildYear +
+				", jibun='" + jibun + '\'' +
+				", lat='" + lat + '\'' +
+				", lng='" + lng + '\'' +
+				'}';
 	}
-
 }

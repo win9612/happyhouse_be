@@ -15,11 +15,11 @@ public class HouseInfoService {
 
 	private final HouseInfoMapper houseInfoMapper;
 
-	public HouseInfoDto getHouseInfo(int aptCode) throws Exception {
+	public HouseInfoDto getHouseInfo(long aptCode) throws Exception {
 		return houseInfoMapper.getHouseInfo(aptCode);
 	}
 
-	public List<HouseDealDto> getHouseDealList(int aptCode) throws Exception {
+	public List<HouseDealDto> getHouseDealList(long aptCode) throws Exception {
 		return houseInfoMapper.listHouseDeal(aptCode);
 	}
 }

@@ -26,14 +26,14 @@ public class HouseInfoController {
 	@ApiOperation(value = "aptCode에 해당하는 아파트 정보를 반환한다.", response = HouseInfoDto.class)
 	@GetMapping("/list/{aptCode}")
 	@ResponseBody
-	public ResponseEntity<HouseInfoDto> houseinfo(@PathVariable("aptCode") int aptCode) throws Exception{
+	public ResponseEntity<HouseInfoDto> houseinfo(@PathVariable("aptCode") long aptCode) throws Exception{
 		return new ResponseEntity<HouseInfoDto>(houseInfoService.getHouseInfo(aptCode), HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "aptCode에 해당하는 아파트의 거래 정보 리스트를 반환한다.", response = List.class)
 	@GetMapping("/deal/{aptCode}")
 	@ResponseBody
-	public ResponseEntity<List<HouseDealDto>> housedeal(@PathVariable("aptCode") int aptCode) throws Exception{
+	public ResponseEntity<List<HouseDealDto>> housedeal(@PathVariable("aptCode") long aptCode) throws Exception{
 		return new ResponseEntity<List<HouseDealDto>>(houseInfoService.getHouseDealList(aptCode), HttpStatus.OK);
 	}
 }

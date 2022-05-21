@@ -18,6 +18,13 @@ public class AuthDto {
 
         @ApiModelProperty(value="비밀번호", example = "1235", required = true)
         private String password;
+
+        public LoginDto(String email, String password) {
+            this.email = email;
+            this.password = password;
+        }
+        public LoginDto() {
+        }
     }
 
     @Getter

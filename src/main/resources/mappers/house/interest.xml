@@ -12,7 +12,7 @@
 	<!-- 해당 유저의 관심지역 목록 불러오기 -->
 	<select id="selectList" parameterType="int"
 		resultType="com.rest.api.model.dto.house.HouseInfoDto">
-		select interest.aptCode, aptName from houseinfo join interest on
+		select interest.aptCode, houseinfo.apartmentName from houseinfo join interest on
 		houseinfo.aptCode = interest.aptCode where interest.no = #{no};
 	</select>
 

@@ -30,10 +30,10 @@ public class SearchService {
         return searchMapper.getAptListByDong(keyword);
     }
 
-    public List<HouseInfoDto> getAptListBtAptName(String aptName) throws  Exception {
-        String[] wordList = aptName.split(" ");
+    public List<HouseInfoDto> getAptListBtAptName(String apartmentName) throws  Exception {
+        String[] wordList = apartmentName.split(" ");
         String keyword = wordList[wordList.length-1];
-        return searchMapper.getAptListByAptName(aptName);
+        return searchMapper.getAptListByAptName(keyword);
     }
 
 }

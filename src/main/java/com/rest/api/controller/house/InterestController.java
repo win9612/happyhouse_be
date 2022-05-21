@@ -27,7 +27,7 @@ public class InterestController {
 	public ResponseEntity addInterest(@RequestParam("no")String no, @RequestParam("aptCode")String aptCode) throws Exception {
 		InterestDto dto = new InterestDto();
 		dto.setNo(Integer.parseInt(no));
-		dto.setAptCode(Integer.parseInt(aptCode));
+		dto.setAptCode(Long.parseLong(aptCode));
 		interestService.addInterest(dto);
 		return new ResponseEntity(HttpStatus.OK);
 	}
@@ -35,7 +35,7 @@ public class InterestController {
 	@ApiOperation(value = "유저번호 no와 아파트번호 aptCode에 해당하는 Interest가 존재하는지 확인한다. 존재할 경우 1을 반환하고, 없을 경우 0을 반환한다.", response = Integer.class)
 	@GetMapping("/check")
 	public ResponseEntity<Integer> checkInterest(@RequestParam("no")String no, @RequestParam("aptCode")String aptCode) throws Exception{
-		int result = interestService.checkInterest(Integer.parseInt(no), Integer.parseInt(aptCode));
+		int result = interestService.checkInterest(Integer.parseInt(no), Long.parseLong(aptCode));
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
 
@@ -49,7 +49,7 @@ public class InterestController {
 	@ApiOperation(value = "유저번호 no와 아파트번호 aptCode에 해당하는 Interest를 관심목록에서 삭제한다.", response = String.class)
 	@DeleteMapping("/delete")
 	public ResponseEntity deleteInterest(@RequestParam("no")String no, @RequestParam("aptCode")String aptCode) throws Exception {
-		interestService.deleteInterest(Integer.parseInt(no), Integer.parseInt(aptCode));
+		interestService.deleteInterest(Integer.parseInt(no), Long.parseLong(aptCode));
 		return new ResponseEntity(HttpStatus.OK);
 	}
 }

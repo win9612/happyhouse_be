@@ -54,14 +54,12 @@ public class HouseMapController {
 	@ApiOperation(value = "dong에 존재하는 아파트 리스트를 반환한다.", response = List.class)
 	@GetMapping("/apt")
 	public ResponseEntity<List<HouseInfoDto>> aptList(@RequestParam("dong") String dong, HttpSession session) throws Exception {
-		System.out.println("/map/apt?dong= " + dong + " => " + haHouseMapService.getSido().toString());
 		return new ResponseEntity<List<HouseInfoDto>>(haHouseMapService.getAptInDong(dong), HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "dongCode에 해당하는 동 객체를 반환한다.")
 	@GetMapping("/dong-info")
 	public ResponseEntity<BaseAddressDto> dongOne(@RequestParam("dong") String dong) throws Exception{
-		System.out.println(baService.getBaseAddressOne(dong));
 		return new ResponseEntity<BaseAddressDto>(baService.getBaseAddressOne(dong), HttpStatus.OK);
 	}
 

@@ -31,11 +31,9 @@ public class SearchController {
             return new ResponseEntity<List<BaseAddressDto>>(searchService.getDongListByGugun(keyword), HttpStatus.OK);
         } else if(keyword.length() >= 2 && lastLetter.equals("동")){
             logger.debug("dongList by dong : {}", searchService.getDongListByDong(keyword));
-            System.out.println(lastLetter);
             return new ResponseEntity<List<BaseAddressDto>>(searchService.getDongListByDong(keyword), HttpStatus.OK);
         } else if(keyword.length() >= 2 && lastLetter.equals("가")){
             logger.debug("dongList by dong : {}", searchService.getDongListByDong(keyword));
-            System.out.println(lastLetter);
             return new ResponseEntity<List<BaseAddressDto>>(searchService.getDongListByDong(keyword), HttpStatus.OK);
         }
         // 글자 수가 1글자 이하고 구나 동으로 끝나지 않을 경우

@@ -4,7 +4,7 @@
 <mapper namespace="com.rest.api.model.mapper.house.HouseInfoMapper">
  
 	<select id="getHouseInfo" parameterType="int" resultType="com.rest.api.model.dto.house.HouseInfoDto">
-		select h.aptCode, h.aptName, h.dongCode, h.dongName, si.sidoname, gu.gugunname, h.buildyear, h.jibun, h.lat, h.lng, h.img, 
+		select h.aptCode, h.apartmentName, h.dongCode, h.dong, si.sidoname, gu.gugunname, h.buildyear, h.jibun, h.lat, h.lng,
 				(select dealAmount from housedeal where aptCode = h.aptCode and no = (select max(no) from housedeal where aptCode = h.aptCode)) recentPrice
 		from houseinfo h
 		left join sidocode si
@@ -15,7 +15,7 @@
 	</select>
 
 	<select id="listHouseDeal" parameterType="int"  resultType="com.rest.api.model.dto.house.HouseDealDto">
-		select d.no, i.aptCode, i.aptName, i.dongName, i.jibun, i.buildYear, d.dealYear, d.dealMonth, d.dealDay, d.dealAmount, d.area, d.floor
+		select d.no, i.aptCode, i.apartmentName, i.dong, i.jibun, i.buildYear, d.dealYear, d.dealMonth, d.dealDay, d.dealAmount, d.area, d.floor
 		from houseinfo i join housedeal d
 		on i.aptCode = d.aptCode
 		where i.aptCode=#{aptCode}

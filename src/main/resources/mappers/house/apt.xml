@@ -5,13 +5,13 @@
 <mapper namespace="com.rest.api.model.mapper.house.HouseMapMapper">
 
 	<select id="getSido" resultType="com.rest.api.model.dto.house.SidoGugunCodeDto">
-		select left(sidoCode,2) sidoCode, sidoName
+		select left(sidoCode,2) sidoCode, sidoName, lat, lng
 		from sidocode
 		order by sidoCode
 	</select>
 	
 	<select id="getGugunInSido" parameterType="string" resultType="com.rest.api.model.dto.house.SidoGugunCodeDto">
-		select left(gugunCode,5) gugunCode, gugunName
+		select left(gugunCode,5) gugunCode, gugunName, lat, lng
 		from guguncode
 		where left(gugunCode,2) = #{sido}
 		order by gugunCode
@@ -25,15 +25,15 @@
 	</select>
 	
 	<select id="getAptInDong" parameterType="string" resultType="com.rest.api.model.dto.house.HouseInfoDto">
-		select h.aptCode, h.aptName, h.buildyear, h.dongCode, h.dongName, h.jibun, h.lat, h.lng, si.sidoname, gu.gugunname,
+		select h.aptCode, h.apartmentName, h.buildYear, h.dongCode, h.dong, h.jibun, h.lat, h.lng, si.sidoName, gu.gugunName,
 				(select dealAmount from housedeal where aptCode = h.aptCode and no = (select max(no) from housedeal where aptCode = h.aptCode)) recentPrice
 		from houseinfo h
-		left join sidocode si
-		on left(h.dongcode,2) = left(si.sidocode,2)
-		left join guguncode gu
-		on left(h.dongcode,5) = left(gu.guguncode,5)
+		left join sidoCode si
+		on left(h.dongCode,2) = left(si.sidoCode,2)
+		left join gugunCode gu
+		on left(h.dongCode,5) = left(gu.gugunCode,5)
 		where dongCode = #{dong} 
-		order by aptName
+		order by apartmentName
 	</select>
 	
 </mapper>

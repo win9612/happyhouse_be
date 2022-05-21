@@ -25,7 +25,7 @@
 	<select id="getAptListByAptName" parameterType="String" resultType="com.rest.api.model.dto.house.HouseInfoDto">
 		select aptCode, apartmentName, dong, lat, lng
 		from houseinfo
-		where aptName like concat('%',#{aptName},'%');
+		where apartmentName like concat('%',#{aptName},'%');
 	</select>
 
 </mapper>

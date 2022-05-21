@@ -24,12 +24,12 @@ public class InterestService {
 		return interestMapper.selectList(no);
 	}
 
-	public int checkInterest(int no, int aptCode) throws Exception {
+	public int checkInterest(int no, long aptCode) throws Exception {
 		return interestMapper.checkInterest(no, aptCode);
 	}
 
 	@Transactional
-	public void deleteInterest(int no, int aptCode) throws Exception {
+	public void deleteInterest(int no, long aptCode) throws Exception {
 		interestMapper.deleteInterest(no, aptCode);
 	}
 

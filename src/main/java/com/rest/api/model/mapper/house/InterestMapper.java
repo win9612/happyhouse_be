@@ -12,6 +12,6 @@ public interface InterestMapper {
 
 	void addInterest(InterestDto interestDto) throws Exception;
 	List<HouseInfoDto> selectList(@Param("no")int no) throws Exception;
-	int checkInterest(@Param("no")int no, @Param("aptCode")int aptCode) throws Exception;
-	void deleteInterest(@Param("no")int no, @Param("aptCode")int aptCode) throws Exception;
+	int checkInterest(@Param("no")int no, @Param("aptCode")long aptCode) throws Exception;
+	void deleteInterest(@Param("no")int no, @Param("aptCode")long aptCode) throws Exception;
 }

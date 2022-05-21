@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface HouseInfoMapper {
 
-	HouseInfoDto getHouseInfo(int aptCode) throws SQLException;
-	List<HouseDealDto> listHouseDeal(int aptCode) throws SQLException; // 아파트 상세정보 & 거래리스트
+	HouseInfoDto getHouseInfo(long aptCode) throws SQLException;
+	List<HouseDealDto> listHouseDeal(long aptCode) throws SQLException; // 아파트 상세정보 & 거래리스트
 	
 }

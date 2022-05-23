@@ -1,6 +1,8 @@
 package com.rest.api.model.service.house;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.rest.api.model.dto.house.HouseInfoDto;
 import com.rest.api.model.dto.house.InterestDto;
@@ -25,12 +27,15 @@ public class InterestService {
 	}
 
 	public int checkInterest(int no, long aptCode) throws Exception {
-		return interestMapper.checkInterest(no, aptCode);
+		InterestDto interestDto = new InterestDto();
+		interestDto.setNo(no);
+		interestDto.setAptCode(aptCode);
+		return interestMapper.checkInterest(interestDto);
 	}
 
 	@Transactional
-	public void deleteInterest(int no, long aptCode) throws Exception {
-		interestMapper.deleteInterest(no, aptCode);
+	public void deleteInterest(InterestDto interestDto) throws Exception {
+		interestMapper.deleteInterest(interestDto);
 	}
 
 }

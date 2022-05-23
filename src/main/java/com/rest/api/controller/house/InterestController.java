@@ -2,6 +2,7 @@ package com.rest.api.controller.house;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rest.api.model.dto.house.HouseInfoDto;
 import com.rest.api.model.dto.house.InterestDto;
 import com.rest.api.model.service.house.InterestService;
@@ -24,11 +25,8 @@ public class InterestController {
 
 	@ApiOperation(value = "유저번호 no와 아파트번호 aptCode를 관심목록에 입력한다.", response = String.class)
 	@PostMapping("/add")
-	public ResponseEntity addInterest(@RequestParam("no")String no, @RequestParam("aptCode")String aptCode) throws Exception {
-		InterestDto dto = new InterestDto();
-		dto.setNo(Integer.parseInt(no));
-		dto.setAptCode(Long.parseLong(aptCode));
-		interestService.addInterest(dto);
+	public ResponseEntity addInterest(@RequestBody InterestDto interestDto) throws Exception {
+		interestService.addInterest(interestDto);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
@@ -48,8 +46,8 @@ public class InterestController {
 
 	@ApiOperation(value = "유저번호 no와 아파트번호 aptCode에 해당하는 Interest를 관심목록에서 삭제한다.", response = String.class)
 	@DeleteMapping("/delete")
-	public ResponseEntity deleteInterest(@RequestParam("no")String no, @RequestParam("aptCode")String aptCode) throws Exception {
-		interestService.deleteInterest(Integer.parseInt(no), Long.parseLong(aptCode));
+	public ResponseEntity deleteInterest(@RequestBody InterestDto interestDto) throws Exception {
+		interestService.deleteInterest(interestDto);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 }

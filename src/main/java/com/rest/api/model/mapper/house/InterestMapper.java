@@ -1,6 +1,7 @@
 package com.rest.api.model.mapper.house;
 
 import java.util.List;
+import java.util.Map;
 
 import com.rest.api.model.dto.house.HouseInfoDto;
 import com.rest.api.model.dto.house.InterestDto;
@@ -12,6 +13,6 @@ public interface InterestMapper {
 
 	void addInterest(InterestDto interestDto) throws Exception;
 	List<HouseInfoDto> selectList(@Param("no")int no) throws Exception;
-	int checkInterest(@Param("no")int no, @Param("aptCode")long aptCode) throws Exception;
-	void deleteInterest(@Param("no")int no, @Param("aptCode")long aptCode) throws Exception;
+	int checkInterest(InterestDto interestDto) throws Exception;
+	void deleteInterest(InterestDto interestDto) throws Exception;
 }

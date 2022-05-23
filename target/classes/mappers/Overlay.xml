@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rest.api.model.mapper.OverlayMapper">
+
+    <select id="getSidoList" resultType="com.rest.api.model.dto.OverlayDto">
+        SELECT sidoCode as code, sidoName as name, lat, lng
+        FROM sidocode
+    </select>
+    <select id="getGugunList" resultType="com.rest.api.model.dto.OverlayDto">
+        SELECT gugunCode as code, gugunName as name, lat, lng
+        FROM guguncode
+    </select>
+    <select id="getDongList" resultType="com.rest.api.model.dto.OverlayDto">
+        SELECT dongCode as code, dongName as name, lat, lng
+        FROM baseaddress
+        WHERE lat > #{startLat}
+          and lat &lt; #{endLat}
+          and lng > #{startLng}
+          and lng &lt; #{endLat}
+    </select>
+    <select id="getAptList" resultType="com.rest.api.model.dto.OverlayDto">
+        SELECT aptCode as code, apartmentName as name, lat, lng
+        FROM houseinfo
+        WHERE lat > #{startLat}
+          and lat &lt; #{endLat}
+          and lng > #{startLng}
+          and lng &lt; #{endLat}
+    </select>
+</mapper>

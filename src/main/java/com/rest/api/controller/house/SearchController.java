@@ -46,11 +46,9 @@ public class SearchController {
         String lastLetter = keyword.substring(keyword.length()-1, keyword.length());
         if(keyword.length() >= 2 && lastLetter.equals("동")){
             logger.debug("aptList : {}", searchService.getAptListByDong(keyword));
-            System.out.println(lastLetter);
             return new ResponseEntity<List<HouseInfoDto>>(searchService.getAptListByDong(keyword), HttpStatus.OK);
         } else if (keyword.length() >= 2 && lastLetter.equals("가")){
             logger.debug("aptList : {}", searchService.getAptListByDong(keyword));
-            System.out.println(lastLetter);
             return new ResponseEntity<List<HouseInfoDto>>(searchService.getAptListByDong(keyword), HttpStatus.OK);
         }
         return null;

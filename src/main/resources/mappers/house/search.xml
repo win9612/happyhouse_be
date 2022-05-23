@@ -5,15 +5,15 @@
 <mapper namespace="com.rest.api.model.mapper.house.SearchMapper">
 
 	<select id="getDongListByGugun" parameterType="String" resultType="com.rest.api.model.dto.house.BaseAddressDto">
-		select no, sidoName, gugunName, dong, dongCode, lat, lng
+		select no, sidoName, gugunName, dongName, dongCode, lat, lng
 		from baseaddress
 		where gugunName=#{gugun};
 	</select>
 
 	<select id="getDongListByDong" parameterType="String" resultType="com.rest.api.model.dto.house.BaseAddressDto">
-		select no, sidoName, gugunName, dong, dongCode, lat, lng
+		select no, sidoName, gugunName, dongName, dongCode, lat, lng
 		from baseaddress
-		where dong=#{dong};
+		where dongName=#{dong};
 	</select>
 
 	<select id="getAptListByDong" parameterType="String" resultType="com.rest.api.model.dto.house.HouseInfoDto">

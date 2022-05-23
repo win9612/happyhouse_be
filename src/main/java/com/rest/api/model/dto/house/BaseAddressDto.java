@@ -4,7 +4,7 @@ public class BaseAddressDto {
 	private int no;
 	private String sidoName;
 	private String gugunName;
-	private String dongname;
+	private String dongName;
 	private String dongCode;
 	private String lat;
 	private String lng;
@@ -13,22 +13,22 @@ public class BaseAddressDto {
 		super();
 	}
 
-	public BaseAddressDto(int no, String sidoName, String gugunName, String dongname, String dongCode, String lat,
+	public BaseAddressDto(int no, String sidoName, String gugunName, String dongName, String dongCode, String lat,
 			String lng) {
 		this.no = no;
 		this.sidoName = sidoName;
 		this.gugunName = gugunName;
-		this.dongname = dongname;
+		this.dongName = dongName;
 		this.dongCode = dongCode;
 		this.lat = lat;
 		this.lng = lng;
 	}
 
-	public BaseAddressDto(String sidoName, String gugunName, String dongname, String dongCode, String lat, String lng) {
+	public BaseAddressDto(String sidoName, String gugunName, String dongName, String dongCode, String lat, String lng) {
 		super();
 		this.sidoName = sidoName;
 		this.gugunName = gugunName;
-		this.dongname = dongname;
+		this.dongName = dongName;
 		this.dongCode = dongCode;
 		this.lat = lat;
 		this.lng = lng;
@@ -59,11 +59,11 @@ public class BaseAddressDto {
 	}
 
 	public String getDongname() {
-		return dongname;
+		return dongName;
 	}
 
 	public void setDongname(String dongname) {
-		this.dongname = dongname;
+		this.dongName = dongname;
 	}
 
 	public String getDongCode() {
@@ -92,7 +92,7 @@ public class BaseAddressDto {
 
 	@Override
 	public String toString() {
-		return "BaseAddressDto [sidoName=" + sidoName + ", gugunName=" + gugunName + ", dongname=" + dongname
+		return "BaseAddressDto [sidoName=" + sidoName + ", gugunName=" + gugunName + ", dongname=" + dongName
 				+ ", dongCode=" + dongCode + ", lat=" + lat + ", lng=" + lng + "]";
 	}
 

@@ -25,7 +25,7 @@ public class RecommandService {
         try {
             region = this.getRegion(email).split(",");
         } catch (Exception e) {
-            return recommandMapper.updateRegion(email, aptCode);
+            return recommandMapper.updateRegion(email, newRegionCode);
         }
 
 
@@ -60,8 +60,9 @@ public class RecommandService {
         StringTokenizer st = new StringTokenizer(region == null ? "" : region, ",");
         while (st.hasMoreTokens()) {
             String code = st.nextToken();
+            System.out.println("code=> "+code);
             BaseAddressDto baDto = baseAddressMapper.getBaseAddressOne(code); // 동 정보
-            System.out.println("dong=> " + baDto.toString());
+            System.out.println("dong=> " + baDto.getDongname());
             String sidoName = baDto.getSidoName();
             List<BaseAddressDto> list = baseAddressMapper.getBaseAddressBySido(sidoName); // 추천 후보 목록
 

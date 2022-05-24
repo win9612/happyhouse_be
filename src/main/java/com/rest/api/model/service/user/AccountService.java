@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
+import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -28,6 +30,47 @@ public class AccountService {
 
     public AccountDto getAccount(String email) {
         return accountMapper.getAccount(email);
+    }
+
+    public String makeNewPassword(){
+        char[] charSet = new char[] {
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        StringBuilder sb = new StringBuilder();
+        SecureRandom sr = new SecureRandom();
+        sr.setSeed(new Date().getTime());
+        int size = 15; // 패스워드의 길이
+        int len = charSet.length;
+        int idx = 0;
+        for(int i = 0 ; i < size ; i++){
+            idx = sr.nextInt(len);
+            sb.append(charSet[idx]);
+        }
+        return sb.toString();
+    }
+
+    public ApiResponse modifyName(String email, String name){
+        ResponseMap result = new ResponseMap();
+        accountMapper.modifyName(email, name);
+        result.setCode(200);
+        return result;
+    }
+
+    public ApiResponse modifyPassword(String email, String password){
+        ResponseMap result = new ResponseMap();
+        String hash = hashPassword(password);
+        accountMapper.modifyPassword(email, hash);
+
+        result.setCode(200);
+        return result;
+    }
+
+    public ApiResponse deleteAccount(String email){
+        ResponseMap result = new ResponseMap();
+        accountMapper.deleteAccount(email);
+        result.setCode(200);
+        return result;
     }
 
 
@@ -57,4 +100,8 @@ public class AccountService {
         return responseMap;
     }
 
+    public int isExistAccount(String email, String name){
+        System.out.println("email => " + email + ", name => " + name);
+        return accountMapper.isExistAccountByEmailAndName(email, name);
+    }
 }

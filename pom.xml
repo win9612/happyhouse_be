@@ -90,8 +90,13 @@
             <version>2.9.0</version>
         </dependency>
 
-
-
+        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+        <!-- 메일 발송을 위한 api -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
 
     </dependencies>
 

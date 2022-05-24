@@ -15,4 +15,27 @@
     <select id="getAccount" parameterType="String" resultType="com.rest.api.model.dto.user.AccountDto">
         SELECT * from user_tb WHERE email = #{email}
     </select>
+
+    <select id="isExistAccountByEmailAndName" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM USER_TB
+        WHERE EMAIL = #{email} AND NAME = #{name}
+    </select>
+
+    <update id="modifyName" parameterType="String">
+        UPDATE USER_TB
+        SET NAME = #{name}
+        WHERE EMAIL = #{email};
+    </update>
+
+    <update id="modifyPassword" parameterType="String">
+        UPDATE USER_TB
+        SET PASSWORD = #{hash}
+        WHERE EMAIL = #{email};
+    </update>
+
+    <delete id="deleteAccount" parameterType="String">
+        DELETE FROM USER_TB
+        WHERE EMAIL = #{email};
+    </delete>
 </mapper>

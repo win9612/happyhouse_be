@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rest.api.model.mapper.RecommandMapper">
+    <update id="updateRegion">
+        UPDATE user_tb
+        set recent_region = #{aptCode}
+        WHERE email = #{email}
+    </update>
+    <select id="selectRegion" resultType="java.lang.String">
+        SELECT recent_region as recentRegion
+        FROM user_tb
+        WHERE email = #{email}
+    </select>
+</mapper>

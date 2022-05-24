@@ -2,7 +2,9 @@ package com.rest.api.controller.house;
 
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
+import com.rest.api.model.dto.house.ChatDataDto;
 import com.rest.api.model.dto.house.HouseDealDto;
 import com.rest.api.model.dto.house.HouseInfoDto;
 import com.rest.api.model.service.RecommandService;
@@ -52,4 +54,11 @@ public class HouseInfoController {
 	public ResponseEntity<List<HouseDealDto>> housedeal(@PathVariable("aptCode") long aptCode) throws Exception{
 		return new ResponseEntity<List<HouseDealDto>>(houseInfoService.getHouseDealList(aptCode), HttpStatus.OK);
 	}
+
+	@ApiOperation(value = "차트 데이터 API")
+	@GetMapping("/getChartData/{aptCode}")
+	public ResponseEntity<?> getChartData(@PathVariable("aptCode") long aptCode) throws Exception {
+		return new ResponseEntity<List<ChatDataDto>>(houseInfoService.getChartDataList(aptCode), HttpStatus.OK);
+	}
+
 }

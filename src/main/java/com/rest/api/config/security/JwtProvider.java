@@ -21,8 +21,8 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class JwtProvider {
     private final String secretKey = "fa9b8ec6-ca24-455b-be5d-de8000c2c4bd";
-    private final long accessExpireTime = 1 * 60 * 1000L; // 1분
-    private final long refreshExpireTime = 1000 * 60 * 2000L; // 2분
+    private final long accessExpireTime = 1000 * 60 * 1000L; // 10분
+    private final long refreshExpireTime = 2000 * 60 * 2000L; // 20분
     private final CustomUserDetailService customUserDetailService;
 
     public String createAccessToken(AuthDto.LoginDto loginDto) {

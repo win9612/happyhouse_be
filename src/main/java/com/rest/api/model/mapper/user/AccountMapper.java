@@ -9,6 +9,7 @@ public interface AccountMapper {
     void insertAccount(AccountDto accountDto);
     AccountDto getAccount(String email);
     int isExistAccountByEmailAndName(String email, String name);
+    int checkSamePassword(String email, String password);
     void modifyName(String email, String name);
     void modifyPassword(String email, String hash);
     void deleteAccount(String email);

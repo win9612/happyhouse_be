@@ -52,6 +52,11 @@ public class AccountController {
         return new ResponseEntity<Integer>(accountService.isExistAccount(email, name), HttpStatus.OK);
     }
 
+    @GetMapping("/check-same-pw")
+    public ResponseEntity<Integer> checkSamePassword(@RequestParam("email")String email, @RequestParam("password")String password){
+        return new ResponseEntity<Integer>(accountService.checkSamePassword(email, password), HttpStatus.OK);
+    }
+
     @GetMapping("/make-pw")
     public ResponseEntity<String> makePassword(){
         return new ResponseEntity<String>(accountService.makeNewPassword(), HttpStatus.OK);

@@ -22,6 +22,12 @@
         WHERE EMAIL = #{email} AND NAME = #{name}
     </select>
 
+    <select id="checkSamePassword" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM USER_TB
+        WHERE EMAIL = #{email} AND PASSWORD = #{password}
+    </select>
+
     <update id="modifyName" parameterType="String">
         UPDATE USER_TB
         SET NAME = #{name}

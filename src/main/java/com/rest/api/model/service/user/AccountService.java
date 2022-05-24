@@ -101,7 +101,13 @@ public class AccountService {
     }
 
     public int isExistAccount(String email, String name){
-        System.out.println("email => " + email + ", name => " + name);
         return accountMapper.isExistAccountByEmailAndName(email, name);
+    }
+
+    public int checkSamePassword(String email, String password){
+        String hash = hashPassword(password);
+        //System.out.println("password => " + password);
+        //System.out.println("hash => " + hash);
+        return accountMapper.checkSamePassword(email, password);
     }
 }

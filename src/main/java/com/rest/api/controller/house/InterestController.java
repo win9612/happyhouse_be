@@ -1,13 +1,17 @@
 package com.rest.api.controller.house;
 
+import java.util.Base64;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rest.api.model.dto.house.HouseInfoDto;
 import com.rest.api.model.dto.house.InterestDto;
 import com.rest.api.model.service.house.InterestService;
+import com.rest.api.model.service.user.AccountService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -22,6 +26,7 @@ public class InterestController {
 	
 	private final Logger logger = LoggerFactory.getLogger(HouseMapController.class);
 	private final InterestService interestService;
+	private final AccountService accountService;
 
 	@ApiOperation(value = "유저번호 no와 아파트번호 aptCode를 관심목록에 입력한다.", response = String.class)
 	@PostMapping("/add")
@@ -39,8 +44,19 @@ public class InterestController {
 
 	@ApiOperation(value = "유저번호 no에 해당하는 관심목록 리스트를 반환한다.", response = List.class)
 	@GetMapping("/list")
-	public ResponseEntity<List<HouseInfoDto>> selectList(@RequestParam("no")String no) throws Exception{
-		List<HouseInfoDto> list = interestService.selectList(Integer.parseInt(no));
+	public ResponseEntity<List<HouseInfoDto>> selectList(@RequestHeader("token")String token) throws Exception{
+		Base64.Decoder decoder = Base64.getUrlDecoder();
+		String[] chunks = token.split("\\.");
+
+		String payload = new String(decoder.decode((chunks[1])));
+
+		JSONParser parser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) parser.parse(payload);
+
+		String email = (String) jsonObject.get("email");
+		int no = (int) accountService.getAccount(email).getIdx();
+
+		List<HouseInfoDto> list = interestService.selectList(no);
 		return new ResponseEntity<List<HouseInfoDto>>(list, HttpStatus.OK);
 	}
 

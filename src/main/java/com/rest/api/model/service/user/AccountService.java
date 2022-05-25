@@ -105,9 +105,11 @@ public class AccountService {
     }
 
     public int checkSamePassword(String email, String password){
-        String hash = hashPassword(password);
-        //System.out.println("password => " + password);
-        //System.out.println("hash => " + hash);
-        return accountMapper.checkSamePassword(email, password);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = getAccount(email).getPassword(); // 이미 암호화된 기존 비밀번호
+        if(encoder.matches(password, encodedPassword)){
+            return 1;
+        }
+        return 0;
     }
 }

@@ -58,6 +58,35 @@ public class QnaBoardController {
         return result;
     }
 
+    @ApiOperation(value = "키워드로 게시글 검색")
+    @GetMapping("/search")
+    @ResponseBody
+    public ApiResponse getListByKeyword(@RequestParam("page")String page, @RequestParam("keyword")String keyword) throws Exception {
+        /* page 변수 전처리 */
+        if(page==null || page.equals(""))
+            page = "1";
+
+
+        /* 현재 페이지의 게시글 목록, 총 페이지 수, 현재 페이지 계산 */
+        List<QnaBoardDto> list = qnaBoardService.getArticleListByKeyword(Integer.parseInt(page), keyword);
+        int totalPage = qnaBoardService.getTotalPageByKeyword(keyword);
+        int currentPage = Integer.parseInt(page);
+
+        /* 현재 페이지 기준 Navi바 구성 계산 */
+        int pageNaviStartPage = qnaBoardService.getPageNaviStartPage(currentPage);
+        int pageNaviEndPage = qnaBoardService.getPageNaviEndPage(currentPage, keyword);
+
+        ResponseMap result = new ResponseMap();
+        result.setResponseData("articleList", list);
+        result.setResponseData("totalPage", totalPage);
+        result.setResponseData("currentPage", currentPage);
+        result.setResponseData("startPage", pageNaviStartPage);
+        result.setResponseData("endPage", pageNaviEndPage);
+        result.setCode(200);
+
+        return result;
+    }
+
     @ApiOperation(value = "bNo에 해당하는 게시글 하나 반환")
     @GetMapping("/getOne")
     @ResponseBody

@@ -2,6 +2,7 @@ package com.rest.api.controller.board;
 
 import com.rest.api.controller.house.HouseMapController;
 import com.rest.api.model.dto.board.NoticeBoardDto;
+import com.rest.api.model.dto.board.QnaBoardDto;
 import com.rest.api.model.service.board.NoticeBoardService;
 import com.rest.api.response.ApiResponse;
 import com.rest.api.response.ResponseMap;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -46,6 +48,34 @@ public class NoticeBoardController {
         /* 현재 페이지 기준 Navi바 구성 계산 */
         int pageNaviStartPage = noticeBoardService.getPageNaviStartPage(currentPage);
         int pageNaviEndPage = noticeBoardService.getPageNaviEndPage(currentPage);
+
+        ResponseMap result = new ResponseMap();
+        result.setResponseData("articleList", list);
+        result.setResponseData("totalPage", totalPage);
+        result.setResponseData("currentPage", currentPage);
+        result.setResponseData("startPage", pageNaviStartPage);
+        result.setResponseData("endPage", pageNaviEndPage);
+        result.setCode(200);
+
+        return result;
+    }
+
+    @ApiOperation(value = "키워드로 게시글 검색")
+    @GetMapping("/search")
+    @ResponseBody
+    public ApiResponse getListByKeyword(@RequestParam("page")String page, @RequestParam("keyword")String keyword) throws Exception {
+        /* page 변수 전처리 */
+        if(page==null || page.equals(""))
+            page = "1";
+
+        /* 현재 페이지의 게시글 목록, 총 페이지 수, 현재 페이지 계산 */
+        List<NoticeBoardDto> list = noticeBoardService.getArticleListByKeyword(Integer.parseInt(page), keyword);
+        int totalPage = noticeBoardService.getTotalPageByKeyword(keyword);
+        int currentPage = Integer.parseInt(page);
+
+        /* 현재 페이지 기준 Navi바 구성 계산 */
+        int pageNaviStartPage = noticeBoardService.getPageNaviStartPage(currentPage);
+        int pageNaviEndPage = noticeBoardService.getPageNaviEndPage(currentPage, keyword);
 
         ResponseMap result = new ResponseMap();
         result.setResponseData("articleList", list);

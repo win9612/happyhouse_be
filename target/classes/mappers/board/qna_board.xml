@@ -11,10 +11,20 @@
     </insert>
 
 <!--    게시글 전체 목록-->
-    <select id="getArticleList" parameterType="int" resultType="com.rest.api.model.dto.board.QnaBoardDto">
+    <select id="getArticleList" parameterType="com.rest.api.model.dto.board.SearchParameter" resultType="com.rest.api.model.dto.board.QnaBoardDto">
         select b_no as bNo, b_writer_email as bWriterEmail, b_writer_name as bWriterName,b_title as bTitle,
             b_content as bContent, b_hits as bHits, b_write_date as bWriteDate, b_modify_date as bModifyDate
         from qna_board
+        order by b_no desc
+        limit #{start}, #{end}
+    </select>
+
+<!--    게시글 검색 -->
+    <select id="getArticleListByKeyword" parameterType="com.rest.api.model.dto.board.SearchParameter" resultType="com.rest.api.model.dto.board.QnaBoardDto">
+        select b_no as bNo, b_writer_email as bWriterEmail, b_writer_name as bWriterName,b_title as bTitle,
+               b_content as bContent, b_hits as bHits, b_write_date as bWriteDate, b_modify_date as bModifyDate
+        from qna_board
+        where b_title like concat('%',#{keyword},'%')
         order by b_no desc
         limit #{start}, #{end}
     </select>
@@ -26,7 +36,7 @@
         from qna_board
         where b_no=#{bNo}
     </select>
-    
+
 <!--    게시글 수정-->
     <update id="updateArticle" parameterType="com.rest.api.model.dto.board.QnaBoardDto">
         update qna_board
@@ -49,5 +59,12 @@
     <select id="getTotalCount" resultType="int">
         select count(*)
         from qna_board
+    </select>
+
+<!--    키워드에 해당하는 전체 글 갯수-->
+    <select id="getTotalCountByKeyword" parameterType="String" resultType="int">
+        select count(*)
+        from qna_board
+        where b_title like concat('%',#{keyword},'%')
     </select>
 </mapper>

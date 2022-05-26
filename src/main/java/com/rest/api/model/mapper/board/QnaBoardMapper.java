@@ -11,6 +11,7 @@ import java.util.List;
 public interface QnaBoardMapper {
     void addArticle(QnaBoardDto qnaBoardDto) throws Exception;
     List<QnaBoardDto> getArticleList(SearchParameter searchParameter) throws Exception;
+    List<QnaBoardDto> getArticleListByEmail(SearchParameter searchParameter) throws Exception;
     List<QnaBoardDto> getArticleListByKeyword(SearchParameter searchParameter);
     QnaBoardDto getArticle(@Param("bNo")int bNo) throws Exception;
     void updateArticle(QnaBoardDto qnaBoardDto) throws Exception;

@@ -19,6 +19,15 @@
         limit #{start}, #{end}
     </select>
 
+<!--    내 게시글 전체 목록-->
+    <select id="getArticleListByEmail" parameterType="com.rest.api.model.dto.board.SearchParameter" resultType="com.rest.api.model.dto.board.QnaBoardDto">
+        select b_no as bNo, b_writer_email as bWriterEmail, b_writer_name as bWriterName,b_title as bTitle,
+               b_content as bContent, b_hits as bHits, b_write_date as bWriteDate, b_modify_date as bModifyDate
+        from qna_board
+        where b_writer_email = #{keyword}
+        order by b_no desc
+    </select>
+
 <!--    게시글 검색 -->
     <select id="getArticleListByKeyword" parameterType="com.rest.api.model.dto.board.SearchParameter" resultType="com.rest.api.model.dto.board.QnaBoardDto">
         select b_no as bNo, b_writer_email as bWriterEmail, b_writer_name as bWriterName,b_title as bTitle,

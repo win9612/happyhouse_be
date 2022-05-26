@@ -71,6 +71,12 @@ public class QnaBoardService {
         return qnaBoardMapper.getArticleList(searchParameter);
     }
 
+    public List<QnaBoardDto> getArticleListByEmail(String keyword) throws Exception{
+        SearchParameter searchParameter = new SearchParameter();
+        searchParameter.setKeyword(keyword);
+        return qnaBoardMapper.getArticleListByEmail(searchParameter);
+    }
+
     public List<QnaBoardDto> getArticleListByKeyword(int page, String keyword) throws Exception{
         int start = (page * 10) - 10; // 고정된 수치. 이대로 해도 됨
         int end = 10; // 한 페이지당 몇 개를 리턴할 것인지

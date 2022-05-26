@@ -87,6 +87,17 @@ public class QnaBoardController {
         return result;
     }
 
+    @ApiOperation(value = "이메일로 게시글 검색")
+    @GetMapping("/search-email")
+    @ResponseBody
+    public ApiResponse getListByEmail(@RequestParam("email")String email) throws Exception {
+        List<QnaBoardDto> list = qnaBoardService.getArticleListByEmail(email);
+        ResponseMap result = new ResponseMap();
+        result.setResponseData("articleList", list);
+        result.setCode(200);
+        return result;
+    }
+
     @ApiOperation(value = "bNo에 해당하는 게시글 하나 반환")
     @GetMapping("/getOne")
     @ResponseBody

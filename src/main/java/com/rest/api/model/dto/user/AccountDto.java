@@ -11,4 +11,5 @@ public class AccountDto {
     private String password;
     private String role="USER";
     private String name;
+    private String social="local";
 }

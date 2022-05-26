@@ -1,9 +1,6 @@
 package com.rest.api.controller;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.rest.api.response.ApiResponse;
 import com.rest.api.response.ResponseMap;
 import io.swagger.annotations.ApiOperation;
@@ -29,6 +26,8 @@ import java.util.Map;
 public class AirKoreaController {
     private static final String SERVICE_KEY = "GF%2FO52%2BGk4bbj31uZwafDerprGaud4MWdfpbTtiRbCuScDQDM%2FwIgaqCJs%2B%2BvobR65oAZ2ZbAe91HHmtB54e6w%3D%3D";
     private static final String URL = "https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustFrcstDspth";
+
+    Gson gson = new GsonBuilder().setLenient().create();
 
     @ApiOperation(value = "미세먼지 결과 반환")
     @GetMapping("/dust")
@@ -94,6 +93,7 @@ public class AirKoreaController {
 
         // 11. Gson 라이브러리를 통해 json 형태로 변환
         JsonParser parser = new JsonParser();
+        System.out.println(sb.toString());
         JsonElement element = parser.parse(sb.toString());
         JsonObject rootob = element.getAsJsonObject().get("response").getAsJsonObject();
         JsonObject body = rootob.getAsJsonObject().get("body").getAsJsonObject();

@@ -5,10 +5,10 @@
 <mapper namespace="com.rest.api.model.mapper.user.AccountMapper">
     <insert id="insertAccount">
         INSERT INTO user_tb(
-            name, email, password, role
+            name, email, password, role, social
         )
         VALUES (
-                   #{name}, #{email}, #{password}, #{role}
+                   #{name}, #{email}, #{password}, #{role}, #{social}
                )
     </insert>
 
